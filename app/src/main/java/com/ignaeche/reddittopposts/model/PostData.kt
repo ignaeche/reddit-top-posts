@@ -1,6 +1,12 @@
 package com.ignaeche.reddittopposts.model
 
-data class PostData(val title: String,
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+
+@Entity(tableName = "posts")
+data class PostData(@PrimaryKey
+                    val id: String,
+                    val title: String,
                     val author: String,
                     val created_utc: Int,
                     val thumbnail: String,
