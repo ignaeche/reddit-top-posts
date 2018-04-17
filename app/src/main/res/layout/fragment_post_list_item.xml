@@ -1,21 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.text.format.DateUtils" />
         <variable
             name="data"
             type="com.ignaeche.reddittopposts.model.PostData" />
     </data>
 
     <android.support.constraint.ConstraintLayout
+        style="@style/AppTheme.Reddit.Item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/item_title"
+            style="@style/AppTheme.Reddit.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{data.title}"/>
+            android:text="@{data.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/item_author"
+            style="@style/AppTheme.Reddit.Author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{data.author}"
+            app:layout_constraintStart_toStartOf="@+id/item_title"
+            app:layout_constraintTop_toBottomOf="@+id/item_title"
+            tools:text="Author" />
+
+        <TextView
+            android:id="@+id/item_date"
+            style="@style/AppTheme.Reddit.Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{DateUtils.getRelativeTimeSpanString(data.created_utc * 1000, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS)}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/item_author"
+            app:layout_constraintStart_toEndOf="@+id/item_author"
+            tools:text="4 hours ago" />
+
+        <TextView
+            android:id="@+id/item_comments"
+            style="@style/AppTheme.Reddit.Comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@plurals/number_comments(data.num_comments, data.num_comments)}"
+            tools:text="1000 comments"
+            app:layout_constraintBaseline_toBaselineOf="@+id/item_date"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RedditTopPosts</string>
+    <plurals name="number_comments">
+        <item quantity="one">%d comment</item>
+        <item quantity="other">%d comments</item>
+    </plurals>
 </resources>

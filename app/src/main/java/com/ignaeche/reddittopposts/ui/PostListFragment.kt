@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -31,8 +32,11 @@ class PostListFragment : Fragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        post_list.layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
+        post_list.layoutManager = layoutManager
+
         post_list.adapter = PostListAdapter()
+        post_list.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
 
         val viewModel = ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
         viewModel.getPosts().observe(this, Observer<Resource<List<PostData>>> {

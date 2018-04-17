@@ -8,4 +8,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Reddit.Item" parent="AppTheme">
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="AppTheme.Reddit.Title" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/redditTitle</item>
+    </style>
+
+    <style name="AppTheme.Reddit.Author" parent="TextAppearance.AppCompat.Caption">
+
+    </style>
+
+    <style name="AppTheme.Reddit.Date" parent="TextAppearance.AppCompat.Caption">
+
+    </style>
+
+    <style name="AppTheme.Reddit.Comments" parent="TextAppearance.AppCompat.Caption">
+
+    </style>
+
 </resources>
