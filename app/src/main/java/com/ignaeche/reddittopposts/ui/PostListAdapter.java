@@ -2,10 +2,13 @@ package com.ignaeche.reddittopposts.ui;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 
+import com.ignaeche.reddittopposts.R;
 import com.ignaeche.reddittopposts.adapters.DataBoundListAdapter;
 import com.ignaeche.reddittopposts.databinding.FragmentPostListItemBinding;
 import com.ignaeche.reddittopposts.model.PostData;
+import com.squareup.picasso.Picasso;
 
 public class PostListAdapter extends DataBoundListAdapter<PostData, FragmentPostListItemBinding> {
     @Override
@@ -20,6 +23,14 @@ public class PostListAdapter extends DataBoundListAdapter<PostData, FragmentPost
     @Override
     protected void bind(FragmentPostListItemBinding binding, PostData item) {
         binding.setData(item);
+        if (URLUtil.isValidUrl(item.getThumbnail())) {
+            Picasso.get().load(item.getThumbnail())
+                    .resizeDimen(R.dimen.reddit_image, R.dimen.reddit_image)
+                    .centerCrop()
+                    .into(binding.itemThumbnail);
+        } else {
+            binding.itemThumbnail.setImageBitmap(null);
+        }
     }
 
     @Override
