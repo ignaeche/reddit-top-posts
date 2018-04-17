@@ -10,8 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.URLUtil
-
 import com.ignaeche.reddittopposts.R
+
 import com.ignaeche.reddittopposts.databinding.FragmentPostBinding
 import com.ignaeche.reddittopposts.di.Injectable
 import com.ignaeche.reddittopposts.viewmodel.PostsViewModel
@@ -33,8 +33,8 @@ class PostFragment : Fragment(), Injectable {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_post, container, false)
+        val binding = FragmentPostBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -50,7 +50,10 @@ class PostFragment : Fragment(), Injectable {
                 it.data = postData
                 // Set image
                 if (URLUtil.isValidUrl(postData?.thumbnail)) {
-                    Picasso.get().load(postData?.thumbnail).into(binding.itemThumbnail)
+                    Picasso.get()
+                            .load(postData?.thumbnail)
+                            .resizeDimen(R.dimen.reddit_big_image, R.dimen.reddit_big_image)
+                            .into(binding.itemThumbnail)
                 } else {
                     binding.itemThumbnail.setImageBitmap(null)
                 }

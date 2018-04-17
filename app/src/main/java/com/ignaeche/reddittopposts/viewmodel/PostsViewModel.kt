@@ -13,7 +13,7 @@ class PostsViewModel
     @Inject constructor(private val postsRepository: PostsRepository)
     : ViewModel() {
 
-    lateinit var postId : MutableLiveData<String>
+    var postId : MutableLiveData<String> = MutableLiveData()
 
     fun getPosts(): LiveData<Resource<List<PostData>>> {
         return postsRepository.getPosts()

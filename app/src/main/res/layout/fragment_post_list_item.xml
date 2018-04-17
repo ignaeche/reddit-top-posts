@@ -10,13 +10,18 @@
         <variable
             name="data"
             type="com.ignaeche.reddittopposts.model.PostData" />
+        <variable
+            name="callback"
+            type="com.ignaeche.reddittopposts.adapters.ClickCallback&lt;com.ignaeche.reddittopposts.model.PostData&gt;" />
     </data>
 
 
     <android.support.constraint.ConstraintLayout
         style="@style/AppTheme.Reddit.Item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{(v) -> callback.onClick(v, data)}"
+        android:background="?android:attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/item_thumbnail"
