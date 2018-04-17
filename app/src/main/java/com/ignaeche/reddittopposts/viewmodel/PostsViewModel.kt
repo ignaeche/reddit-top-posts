@@ -30,4 +30,8 @@ class PostsViewModel
     fun removePost(post: PostData) {
         postsRepository.removePost(post)
     }
+
+    fun removeAllPosts() {
+        postsRepository.removeAllPosts()
+    }
 }

@@ -58,4 +58,8 @@ class PostsRepository
     fun removePost(post: PostData) {
         appExecutors.diskIO().execute { database.postsDao().deletePost(post) }
     }
+
+    fun removeAllPosts() {
+        appExecutors.diskIO().execute { database.postsDao().deleteAllPosts() }
+    }
 }
