@@ -8,6 +8,7 @@ import com.ignaeche.reddittopposts.db.AppDatabase
 import com.ignaeche.reddittopposts.model.PostData
 import com.ignaeche.reddittopposts.model.RedditResponse
 import com.ignaeche.reddittopposts.model.ResponseData
+import com.ignaeche.reddittopposts.model.UnreadPosts
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,6 +22,7 @@ class PostsRepository
         return object : NetworkBoundResource<List<PostData>, RedditResponse<ResponseData>>(appExecutors) {
             override fun saveCallResult(request: RedditResponse<ResponseData>) {
                 database.postsDao().insertPosts(request.data.children.map { it.data })
+                database.postsDao().insertUnreadPosts(request.data.children.map { UnreadPosts(id = it.data.id) })
             }
 
             override fun shouldFetch(data: List<PostData>?): Boolean {
@@ -39,5 +41,9 @@ class PostsRepository
 
     fun getPost(id: String) : LiveData<PostData> {
         return database.postsDao().getPost(id)
+    }
+
+    fun markPostAsRead(id: String) {
+        appExecutors.diskIO().execute { database.postsDao().markAsRead(id) }
     }
 }

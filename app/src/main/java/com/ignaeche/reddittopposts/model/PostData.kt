@@ -11,4 +11,4 @@ data class PostData(@PrimaryKey
                     val created_utc: Long,
                     val thumbnail: String,
                     val num_comments: Int,
-                    val unread: Boolean)
+                    val unread: Boolean = true)

@@ -22,4 +22,8 @@ class PostsViewModel
     fun getPost() : LiveData<PostData> {
         return Transformations.switchMap(postId, postsRepository::getPost)
     }
+
+    fun markAsRead(id: String) {
+        postsRepository.markPostAsRead(id)
+    }
 }

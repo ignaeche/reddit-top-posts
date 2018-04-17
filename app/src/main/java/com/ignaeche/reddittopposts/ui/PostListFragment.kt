@@ -49,6 +49,7 @@ class PostListFragment : Fragment(), Injectable, ClickCallback<PostData> {
     }
 
     override fun onClick(view: View, t: PostData) {
+        viewModel.markAsRead(t.id)
         // This can be done much better but it's quick
         activity?.also {
             val container = it.findViewById<FrameLayout>(R.id.container)
