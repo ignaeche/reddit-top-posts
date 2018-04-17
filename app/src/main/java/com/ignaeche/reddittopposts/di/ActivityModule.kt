@@ -1,6 +1,7 @@
 package com.ignaeche.reddittopposts.di
 
 import com.ignaeche.reddittopposts.MainActivity
+import com.ignaeche.reddittopposts.ui.PostFragment
 import com.ignaeche.reddittopposts.ui.PostListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -13,4 +14,7 @@ abstract class ActivityModule {
     // Fragments
     @ContributesAndroidInjector
     abstract fun contributePostListFragment(): PostListFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributePostFragment(): PostFragment
 }

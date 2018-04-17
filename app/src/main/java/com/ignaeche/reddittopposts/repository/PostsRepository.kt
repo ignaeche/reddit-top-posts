@@ -36,4 +36,8 @@ class PostsRepository
             }
         }.asLiveData()
     }
+
+    fun getPost(id: String) : LiveData<PostData> {
+        return database.postsDao().getPost(id)
+    }
 }
