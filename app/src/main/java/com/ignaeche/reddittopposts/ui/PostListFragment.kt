@@ -11,12 +11,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.Toast
 
 import com.ignaeche.reddittopposts.R
 import com.ignaeche.reddittopposts.adapters.ClickCallback
 import com.ignaeche.reddittopposts.di.Injectable
 import com.ignaeche.reddittopposts.model.PostData
 import com.ignaeche.reddittopposts.repository.Resource
+import com.ignaeche.reddittopposts.repository.Status
 import com.ignaeche.reddittopposts.viewmodel.PostsViewModel
 import javax.inject.Inject
 
@@ -43,7 +45,21 @@ class PostListFragment : Fragment(), Injectable, ClickCallback<PostData> {
         post_list.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
 
         viewModel = ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
+
+        swipe_refresh.setOnRefreshListener { viewModel.refreshPosts() }
         viewModel.getPosts().observe(this, Observer<Resource<List<PostData>>> {
+            when (it?.status) {
+                Status.LOADING -> {
+                    swipe_refresh.isRefreshing = true
+                }
+                Status.SUCCESS -> {
+                    swipe_refresh.isRefreshing = false
+                }
+                Status.ERROR -> {
+                    swipe_refresh.isRefreshing = false
+                    Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
+                }
+            }
             (post_list.adapter as PostListAdapter).replace(it?.data)
         })
     }

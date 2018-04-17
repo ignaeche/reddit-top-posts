@@ -53,6 +53,7 @@ class PostFragment : Fragment(), Injectable {
                     Picasso.get()
                             .load(postData?.thumbnail)
                             .resizeDimen(R.dimen.reddit_big_image, R.dimen.reddit_big_image)
+                            .centerInside()
                             .into(binding.itemThumbnail)
                 } else {
                     binding.itemThumbnail.setImageBitmap(null)

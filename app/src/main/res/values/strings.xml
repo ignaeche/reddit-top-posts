@@ -2,6 +2,7 @@
     <string name="app_name">RedditTopPosts</string>
     <string name="dismiss_post">Dismiss post</string>
     <string name="dismiss_all">Dismiss all</string>
+    <string name="network_error">Network error</string>
     <plurals name="number_comments">
         <item quantity="one">%d comment</item>
         <item quantity="other">%d comments</item>

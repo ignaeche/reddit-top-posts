@@ -14,9 +14,15 @@ class PostsViewModel
     : ViewModel() {
 
     var postId : MutableLiveData<String> = MutableLiveData()
+    var refresh : MutableLiveData<Boolean> = MutableLiveData()
 
     fun getPosts(): LiveData<Resource<List<PostData>>> {
-        return postsRepository.getPosts()
+        refreshPosts()
+        return Transformations.switchMap(refresh, { _ -> postsRepository.getPosts() })
+    }
+
+    fun refreshPosts() {
+        refresh.value = true
     }
 
     fun getPost() : LiveData<PostData> {

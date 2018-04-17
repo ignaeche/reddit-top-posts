@@ -60,6 +60,7 @@ class PostsRepository
     }
 
     fun removeAllPosts() {
+        rateLimiter.reset(KEY)
         appExecutors.diskIO().execute { database.postsDao().deleteAllPosts() }
     }
 }
