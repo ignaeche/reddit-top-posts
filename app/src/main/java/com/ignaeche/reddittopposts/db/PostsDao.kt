@@ -21,4 +21,7 @@ interface PostsDao {
 
     @Query("UPDATE unread_posts SET unread = :unread WHERE id = :id")
     fun markAsRead(id: String, unread: Boolean = false)
+
+    @Delete
+    fun deletePost(post: PostData)
 }

@@ -16,13 +16,18 @@
             type="com.ignaeche.reddittopposts.adapters.ClickCallback&lt;com.ignaeche.reddittopposts.model.PostData&gt;" />
     </data>
 
+    <LinearLayout
+        android:id="@+id/item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(v) -> callback.onClick(v, data)}"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="vertical">
 
     <android.support.constraint.ConstraintLayout
         style="@style/AppTheme.Reddit.Item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@{(v) -> callback.onClick(v, data)}"
-        android:background="?android:attr/selectableItemBackground">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/item_thumbnail"
@@ -97,4 +102,22 @@
             app:srcCompat="@drawable/unread" />
 
     </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/dismiss_button"
+                style="@style/AppTheme.Reddit.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:onClick="@{(v) -> callback.onClick(v, data)}"
+                android:text="@string/dismiss_post"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
 </layout>

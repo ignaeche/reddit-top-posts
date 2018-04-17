@@ -49,14 +49,21 @@ class PostListFragment : Fragment(), Injectable, ClickCallback<PostData> {
     }
 
     override fun onClick(view: View, t: PostData) {
-        viewModel.markAsRead(t.id)
-        // This can be done much better but it's quick
-        activity?.also {
-            val container = it.findViewById<FrameLayout>(R.id.container)
-            it.supportFragmentManager.beginTransaction()
-                    .replace(container.id, PostFragment.newInstance(t.id))
-                    .addToBackStack(null)
-                    .commit()
+        when (view.id) {
+            R.id.item_layout -> {
+                viewModel.markAsRead(t.id)
+                // This can be done much better but it's quick
+                activity?.also {
+                    val container = it.findViewById<FrameLayout>(R.id.container)
+                    it.supportFragmentManager.beginTransaction()
+                            .replace(container.id, PostFragment.newInstance(t.id))
+                            .addToBackStack(null)
+                            .commit()
+                }
+            }
+            R.id.dismiss_button -> {
+                viewModel.removePost(t)
+            }
         }
     }
 }

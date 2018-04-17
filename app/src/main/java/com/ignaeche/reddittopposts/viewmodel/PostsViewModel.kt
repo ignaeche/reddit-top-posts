@@ -26,4 +26,8 @@ class PostsViewModel
     fun markAsRead(id: String) {
         postsRepository.markPostAsRead(id)
     }
+
+    fun removePost(post: PostData) {
+        postsRepository.removePost(post)
+    }
 }

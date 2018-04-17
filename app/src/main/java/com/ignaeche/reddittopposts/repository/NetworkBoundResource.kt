@@ -61,7 +61,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
 
     }
 
-    protected fun onFetchFailed() {}
+    abstract fun onFetchFailed()
 
     fun asLiveData(): LiveData<Resource<ResultType>> {
         return result

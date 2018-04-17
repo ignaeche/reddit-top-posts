@@ -28,4 +28,8 @@
 
     </style>
 
+    <style name="AppTheme.Reddit.Button" parent="Widget.AppCompat.Button.Borderless.Colored">
+
+    </style>
+
 </resources>
