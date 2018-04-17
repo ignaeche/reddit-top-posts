@@ -54,9 +54,9 @@ class PostListFragment : Fragment(), Injectable, ClickCallback<PostData> {
                 viewModel.markAsRead(t.id)
                 // This can be done much better but it's quick
                 activity?.also {
-                    val container = it.findViewById<FrameLayout>(R.id.container)
+                    val container = it.findViewById<FrameLayout>(R.id.container)?.id ?: it.findViewById<FrameLayout>(R.id.container_right).id
                     it.supportFragmentManager.beginTransaction()
-                            .replace(container.id, PostFragment.newInstance(t.id))
+                            .replace(container, PostFragment.newInstance(t.id))
                             .addToBackStack(null)
                             .commit()
                 }

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.format.DateUtils" />
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.ignaeche.reddittopposts.model.PostData" />
+        <variable
+            name="callback"
+            type="com.ignaeche.reddittopposts.adapters.ClickCallback&lt;com.ignaeche.reddittopposts.model.PostData&gt;" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(v) -> callback.onClick(v, data)}"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        style="@style/AppTheme.Reddit.Item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_thumbnail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/item_title"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.19" />
+
+        <TextView
+            android:id="@+id/item_title"
+            style="@style/AppTheme.Reddit.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{data.title}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_thumbnail"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/item_author"
+            style="@style/AppTheme.Reddit.Author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{data.author}"
+            app:layout_constraintStart_toStartOf="@+id/item_title"
+            app:layout_constraintTop_toBottomOf="@+id/item_title"
+            tools:text="Author" />
+
+        <TextView
+            android:id="@+id/item_date"
+            style="@style/AppTheme.Reddit.Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{DateUtils.getRelativeTimeSpanString(data.created_utc * 1000, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS)}"
+            app:layout_constraintStart_toStartOf="@+id/item_author"
+            app:layout_constraintTop_toBottomOf="@+id/item_author"
+            tools:text="4 hours ago" />
+
+        <TextView
+            android:id="@+id/item_comments"
+            style="@style/AppTheme.Reddit.Comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{@plurals/number_comments(data.num_comments, data.num_comments)}"
+            app:layout_constraintStart_toStartOf="@+id/item_date"
+            app:layout_constraintTop_toBottomOf="@+id/item_date"
+            tools:text="1000 comments" />
+
+        <ImageView
+            android:id="@+id/item_unread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="@{data.unread ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_title"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/unread" />
+
+    </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/dismiss_button"
+                style="@style/AppTheme.Reddit.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:onClick="@{(v) -> callback.onClick(v, data)}"
+                android:text="@string/dismiss_post"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+</layout>
