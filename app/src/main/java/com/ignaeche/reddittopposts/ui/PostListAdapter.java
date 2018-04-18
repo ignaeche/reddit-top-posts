@@ -44,7 +44,7 @@ public class PostListAdapter extends DataBoundListAdapter<PostData, FragmentPost
 
     @Override
     protected boolean areItemsTheSame(PostData oldItem, PostData newItem) {
-        return oldItem.getId().equals(oldItem.getId());
+        return oldItem.getId().equals(newItem.getId());
     }
 
     @Override
